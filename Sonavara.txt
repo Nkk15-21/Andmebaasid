@@ -1,1 +1,19 @@
-
+Andme typ:
+1. СИмбволы или текст (VARCHAR(25), CHAR(5), TEXT)
+2. Число (INT, SMALLINT, Decimal(5, 2) - где 5 -> все числаб 2 -> после комы)
+3. Логическое (bit, bool, boolean, true/false)
+4. Время/день (date/time, date, time)
+----------------------------------------
+Ограничения: 
+* PRIMARY KEY - уникальная связь
+* FORGEIN KEY - связь с первичным ключом другой таблицы
+* NOT NULL 
+* UNIQUE
+* CHECK - выбор
+-----------------------------------------
+SQL
+* DDL - Data Definition Language, CREATE TABLE, ALTER TABLE, DROP TABLE  (работа с таблицами)
+* DMl - Data Manipulation, INSERT INTO, UPDATE, DELETE (работа с текстами)
+-----------------------------------------
+SQL Server Managment Studio
+XAMPP / phpMyAdmin
