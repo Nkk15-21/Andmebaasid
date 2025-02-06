@@ -91,3 +91,101 @@ select * from kinokava
 select * from zanr
 
 drop table kinokava
+
+
+
+---------------------------------------------------------------------------------------
+ДЗ
+
+create database RK;
+
+use RK;
+CREATE TABLE Raamad(
+raamatudID int PRIMARY KEY identity (1,1),
+autor varchar(500),
+nimetus varchar(500),
+keel varchar (200),
+zanr varchar(200),
+)
+
+-------------------------------------------------------------------
+SELECT * FROM Raamad;
+DROP TABLE Raamad;
+DROP PROCEDURE lisaRaamad;
+-------------------------------------------------------------------
+
+INSERT INTO Raamad(
+autor, nimetus, keel, zanr)
+VALUES(
+'Lev Nikolajevitch Tolstoi', 'Sõda ja rahu', 'Vene keel', 'Romaan Sõjaromaan');
+
+-------------------------------------------------------------------
+
+
+CREATE PROCEDURE lisaRaamad
+
+@uusRam varchar(500),
+@keel varchar(500),
+@autor varchar (250),
+@zanr varchar(200)
+
+AS
+BEGIN
+INSERT INTO Raamad(
+autor, nimetus, keel, zanr)
+VALUES(
+@autor, @uusRam, @keel, @zanr);
+
+END;
+
+-------------------------------------------------------------------
+	-- kutse prots
+-------------------------------------------------------------------
+
+EXEC lisaRaamad 'Ernest Hemingway', '"Kellele lüüakse hingekella"', 'Inglise keel', 'Romaan, Väljamõeldis, sõjaromaan';
+
+exec lisaRaamad
+@autor = 'Ernest Hemingway',
+@uusRam = 'Kellele lüüakse hingekella',
+@keel = 'Inglise keel',
+@zanr = 'Romaan, Väljamõeldis, sõjaromaan';
+-------------------------------------------------------------------
+	-- kustutamine tabelist id järgi
+-------------------------------------------------------------------
+
+CREATE PROCEDURE kustRaam
+
+@id int
+
+AS
+BEGIN
+SELECT * FROM Raamad;
+DELETE FROM Raamad WHERE raamatudID = @id;
+SELECT * FROM Raamad;
+
+END;
+
+-------------------------------------------------------------------
+	-- kutse
+-------------------------------------------------------------------
+SELECT * FROM Raamad;
+EXEC kustRaam 2;
+EXEC kustRaam @id=4;
+
+-------------------------------------------------------------------
+	-- protseduur mis otsib ja näitab uudist esimese tähte järgi
+-------------------------------------------------------------------
+
+CREATE PROCEDURE otsingRaamad
+@taht char(1)
+AS
+BEGIN
+SELECT * FROM Raamad
+WHERE autor Like @taht +'%';
+END;
+
+-------------------------------------------------------------------
+	-- kutse
+-------------------------------------------------------------------
+
+EXEC otsingRaamad 'L';
